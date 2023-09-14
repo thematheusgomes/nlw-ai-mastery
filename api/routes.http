@@ -1,0 +1,37 @@
+# @name get-all-prompts
+GET http://localhost:3333/prompts
+
+###
+
+# @name upload-video
+POST http://localhost:3333/videos
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="english_class.mp3"
+Content-Type: audio/mpeg
+
+< ./english_class.mp3
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+# @name create-transcription
+POST http://localhost:3333/videos/76e12ab4-8a40-4188-b65d-82dbbc571ea1/transcription
+Content-Type: application/json
+
+{
+    "prompt": "improve, english, five minutes"
+}
+
+###
+
+# @name generate-ai-completion
+POST http://localhost:3333/ai/complete
+Content-Type: application/json
+
+{
+    "videoId": "76e12ab4-8a40-4188-b65d-82dbbc571ea1",
+    "temperature": 0.5,
+    "template": "Generate a good resume of the follow video transcription: '''{transcription}'''"
+}
