@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prisma:seed": "pnpm prisma db seed",
+    "prisma:migrate": "pnpm prisma migrate dev",
     "dev": "tsx watch src/server.ts"
   },
   "keywords": [],
